@@ -2,13 +2,18 @@ import React from 'react';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import NoteStack from './NoteStackNavigator';
+import NoteScreen from '../screens/NoteScreen';
 import UserStack from './UserInfoNavigator';
 
 const routeConfig = {
-  Note: NoteStack,
-  User: UserStack,
-}
+  Note: NoteScreen,
+  User: {
+    screen: UserStack,
+    navigationOptions: {
+      header: null,
+    },
+  },
+};
 
 const tabConfig = {
   navigationOptions: ({ navigation }) => ({

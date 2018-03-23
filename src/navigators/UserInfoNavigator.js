@@ -4,12 +4,11 @@ import UserInfoScreen from '../screens/UserInfoScreen';
 import LogoutScreen from '../screens/LogoutScreen';
 
 const routeConfig = {
-  Home: UserInfoScreen,
-  Search: LogoutScreen,
+  UserInfo: UserInfoScreen,
+  Logout: LogoutScreen,
 };
 
 const navigationConfig = {
-  initialRouteName: 'Home',
   navigationOptions: {
     headerStyle: {
       backgroundColor: '#F0B800',
@@ -21,6 +20,6 @@ const navigationConfig = {
   },
 };
 
-const NoteStackNavigator = StackNavigator(routeConfig, navigationConfig);
+const UserInfoNavigator = StackNavigator(routeConfig, navigationConfig);
 
-export default NoteStackNavigator;
+export default UserInfoNavigator;

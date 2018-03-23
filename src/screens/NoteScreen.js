@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import { View, SafeAreaView, Text } from 'react-native';
+import { View, SafeAreaView, Button } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 class NoteScreen extends Component {
   static navigationOptions = ({ navigation }) => {
-    const { navigate } = navigation;
     return ({
-      title: 'Notes',
+      title: 'Note',
       headerRight: (
         <View style={{ marginRight: 20 }}>
           <Ionicons
             name={'ios-search'}
             size={25}
             color={'white'}
-            onPress={() => navigate('Search')}
+            onPress={() => {
+              navigation.navigate('Search');
+            }}
           />
         </View>
       )
@@ -23,7 +24,18 @@ class NoteScreen extends Component {
   render() {
     return (
       <SafeAreaView style={styles.containerStyle}>
-        <Text>This is NoteScreen</Text>
+        <Button
+          title={'Open Note'}
+          onPress={() => {
+            this.props.navigation.navigate('NoteModal')
+          }}
+        />
+        <Button
+          title={'New Note'}
+          onPress={() => {
+            this.props.navigation.navigate('NoteModal')
+          }}
+        />
       </SafeAreaView>
     );
   }
