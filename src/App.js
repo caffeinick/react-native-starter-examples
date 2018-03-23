@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import NoteModalNavigator from './navigators/NoteModalNavigator';
+import RootNavigator from './navigators/RootNavigator';
 
 class App extends Component {
   render() {
     return (
-      <NoteModalNavigator />
+      <RootNavigator />
     );
   }
 }

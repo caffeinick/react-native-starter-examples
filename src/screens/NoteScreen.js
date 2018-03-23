@@ -36,6 +36,13 @@ class NoteScreen extends Component {
             this.props.navigation.navigate('NoteModal')
           }}
         />
+
+        <Button
+          title={'Go to LoginPage'}
+          onPress={() => {
+            this.props.navigation.navigate('UnauthModal')
+          }}
+        />
       </SafeAreaView>
     );
   }
