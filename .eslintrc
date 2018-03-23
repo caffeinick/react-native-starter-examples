@@ -12,6 +12,7 @@
   ],
   "rules": {
     "react/require-extension": "off",
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "react/display-name": "off"
   }
 }

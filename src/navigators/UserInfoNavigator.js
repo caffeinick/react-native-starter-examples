@@ -1,11 +1,11 @@
 import { StackNavigator } from 'react-navigation';
 
-import NoteScreen from '../screens/NoteScreen';
-import SearchScreen from '../screens/SearchScreen';
+import UserInfoScreen from '../screens/UserInfoScreen';
+import LogoutScreen from '../screens/LogoutScreen';
 
 const routeConfig = {
-  Home: NoteScreen,
-  Search: SearchScreen,
+  Home: UserInfoScreen,
+  Search: LogoutScreen,
 };
 
 const navigationConfig = {

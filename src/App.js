@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import NoteStackNavigator from './navigators/NoteStackNavigator';
+import NoteTabNavigator from './navigators/NoteTabNavigator';
 
 class App extends Component {
   render() {
     return (
-      <NoteStackNavigator />
+      <NoteTabNavigator />
     );
   }
 }

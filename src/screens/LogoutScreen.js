@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { SafeAreaView, Text } from 'react-native';
 
-class SearchScreen extends Component {
+class LogoutScreen extends Component {
   static navigationOptions = {
-    title: 'Search',
+    title: 'Logout',
   };
   
   render() {
     return (
       <SafeAreaView style={styles.containerStyle}>
-        <Text>This is SearchScreen</Text>
+        <Text>This is LogoutScreen</Text>
       </SafeAreaView>
     );
   }
@@ -23,4 +23,4 @@ const styles = {
   }
 };
 
-export default SearchScreen;
+export default LogoutScreen;
