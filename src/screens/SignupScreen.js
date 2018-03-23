@@ -16,7 +16,8 @@ const styles = {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  }
+    backgroundColor: '#F0B800',
+  },
 };
 
 export default SignupScreen;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { SafeAreaView, Text, Button } from 'react-native';
+import PropTypes from 'prop-types';
 
 class LandingScreen extends Component {  
   render() {
@@ -23,12 +24,17 @@ class LandingScreen extends Component {
   }
 }
 
+LandingScreen.propTypes = {
+  navigation: PropTypes.object,
+};
+
 const styles = {
   containerStyle: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  }
+    backgroundColor: '#F0B800',
+  },
 };
 
 export default LandingScreen;

@@ -12,6 +12,7 @@ const routeConfig = {
 
 const navigationConfig = {
   initialRouteName: 'Landing',
+  headerMode: 'none',
 };
 
 const NoteStackNavigator = StackNavigator(routeConfig, navigationConfig);

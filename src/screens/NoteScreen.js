@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, SafeAreaView, Button } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import PropTypes from 'prop-types';
 
 class NoteScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -47,6 +48,10 @@ class NoteScreen extends Component {
     );
   }
 }
+
+NoteScreen.propTypes = {
+  navigation: PropTypes.object
+};
 
 const styles = {
   containerStyle: {
