@@ -1,9 +1,30 @@
 import React, { Component } from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import { View, Button, Alert, SafeAreaView, Text } from 'react-native';
 
 class NoteDetailScreen extends Component {
-  static navigationOptions = {
-    title: 'Details',
+  static navigationOptions = ({ navigation }) => {
+    return ({
+      title: 'Details',
+      headerLeft: (
+        <View style={{ marginLeft: 10 }}>
+          <Button
+            title={'Cancel'}
+            onPress={() => {
+              Alert.alert(
+                'Are you sure?',
+                '',
+                [
+                  {text: 'Cancel', style: 'cancel'},
+                  {text: 'OK', onPress: () => navigation.pop()}
+                ],
+                { cancelable: false }
+              )
+            }}
+            color={'white'}
+          />
+        </View>
+      )
+    })
   };
   
   render() {
