@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View, TouchableOpacity, Text } from 'react-native';
+import { SafeAreaView, View, Text, AsyncStorage } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { Button } from '../components/Button';
 
-class SignupScreen extends Component {  
+class SignupScreen extends Component {
+  _signInAsync = async () => {
+    await AsyncStorage.setItem('userToken', 'Admin');
+    this.props.navigation.navigate('AuthDrawer');
+  };
+
   render() {
     const {
       containerStyle,
@@ -21,7 +26,7 @@ class SignupScreen extends Component {
         
         <View style={bodyStyle}>
           <Button
-            onPress={() => {this.props.navigation.navigate('Login')}}
+            onPress={this._signInAsync}
             title={'Sign up as Admin'}
           />
           <Button
@@ -36,7 +41,7 @@ class SignupScreen extends Component {
 
 SignupScreen.propTypes = {
   navigation: PropTypes.object,
-}
+};
 
 const styles = {
   containerStyle: {

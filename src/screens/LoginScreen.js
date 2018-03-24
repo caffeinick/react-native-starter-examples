@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View, TouchableOpacity, Text } from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  TouchableOpacity,
+  Text,
+  AsyncStorage,
+} from 'react-native';
 import PropTypes from 'prop-types';
 
 import { Button } from '../components/Button';
 
-class LoginScreen extends Component {  
+class LoginScreen extends Component {
+  _signInAsync = async () => {
+    await AsyncStorage.setItem('userToken', 'Admin');
+    this.props.navigation.navigate('AuthDrawer');
+  };
+  
   render() {
     const {
       containerStyle,
@@ -19,9 +30,12 @@ class LoginScreen extends Component {
     return (
       <SafeAreaView style={containerStyle}>
         <View style={headerStyle}>
-          <TouchableOpacity style={passButton}>
+          <TouchableOpacity 
+            style={passButton}
+            onPress={() => {this.props.navigation.navigate('PasswordModal')}}
+          >
             <Text style={passButtonTitle}>
-              Forget Password?
+              Forgot Password?
             </Text>
           </TouchableOpacity>
         </View>
@@ -32,7 +46,7 @@ class LoginScreen extends Component {
         
         <View style={bodyStyle}>
           <Button
-            onPress={() => {this.props.navigation.navigate('Login')}}
+            onPress={this._signInAsync}
             title={'Login as Admin'}
           />
           <Button
@@ -51,7 +65,7 @@ class LoginScreen extends Component {
 
 LoginScreen.propTypes = {
   navigation: PropTypes.object,
-}
+};
 
 const styles = {
   containerStyle: {

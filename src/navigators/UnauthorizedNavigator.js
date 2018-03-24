@@ -12,6 +12,9 @@ const routeConfig = {
   },
   PasswordModal: {
     screen: FindPasswordScreen,
+    navigationOptions: {
+      header: null,
+    },
   },
 };
 
