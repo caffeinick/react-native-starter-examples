@@ -39,6 +39,10 @@ class LoginScreen extends Component {
             onPress={() => {this.props.navigation.navigate('Signup')}}
             title={'Sign Up'}
           />
+          <Button
+            onPress={() => {this.props.navigation.pop()}}
+            title={'Maybe Later...'}
+          />
         </View>
       </SafeAreaView>
     );
