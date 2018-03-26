@@ -1,15 +1,14 @@
 import { StackNavigator } from 'react-navigation';
 
-import NoteTab from './NoteTabNavigator';
-import SearchScreen from '../screens/SearchScreen';
+import UserInfoScreen from '../screens/UserInfoScreen';
+import LogoutScreen from '../screens/LogoutScreen';
 
 const routeConfig = {
-  Home: NoteTab,
-  Search: SearchScreen,
+  UserInfo: UserInfoScreen,
+  Logout: LogoutScreen,
 };
 
 const navigationConfig = {
-  initialRouteName: 'Home',
   navigationOptions: {
     headerStyle: {
       backgroundColor: '#F0B800',
@@ -21,6 +20,6 @@ const navigationConfig = {
   },
 };
 
-const NoteStackNavigator = StackNavigator(routeConfig, navigationConfig);
+const UserInfoNavigator = StackNavigator(routeConfig, navigationConfig);
 
-export default NoteStackNavigator;
+export default UserInfoNavigator;
