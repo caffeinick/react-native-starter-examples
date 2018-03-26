@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { StatusBar, View, SafeAreaView, Button } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { navigateTo } from '../actions/nav';
+
 class NoteScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
+  onNavigateTo(path) {
+    this.props.navigateTo(path)
+  }
+  
+  static navigationOptions = ({ navigation }) => {    
     return ({
       title: 'Note',
       headerRight: (
@@ -42,7 +49,7 @@ class NoteScreen extends Component {
         <Button
           title={'Open Note'}
           onPress={() => {
-            this.props.navigation.navigate('NoteModal')
+            this.onNavigateTo('NoteModal')
           }}
         />
         <Button
@@ -64,7 +71,8 @@ class NoteScreen extends Component {
 }
 
 NoteScreen.propTypes = {
-  navigation: PropTypes.object
+  navigation: PropTypes.object,
+  navigateTo: PropTypes.func,
 };
 
 const styles = {
@@ -75,4 +83,4 @@ const styles = {
   },
 };
 
-export default NoteScreen;
+export default connect(null, { navigateTo })(NoteScreen);

@@ -1,6 +1,7 @@
 import { NavigationActions } from 'react-navigation';
 
-import { RootNavigator} from '../navigators/RootNavigator';
+import { RootNavigator } from '../navigators/RootNavigator';
+import * as types from '../actions/types';
 
 const initialNavState = RootNavigator.router.getStateForAction(RootNavigator.router.getActionForPathAndParams('Loading'));
 
@@ -8,9 +9,11 @@ function NavigationReducer(state = initialNavState, action) {
   let nextState;
 
   switch (action.type) {
-    case 'Loading':
+    case types.NAVIGATE_TO:
       nextState = RootNavigator.router.getStateForAction(
-        NavigationActions.navigate('Loading'),
+        NavigationActions.navigate({
+          routeName: action.payload.routeName,
+        }),
         state
       );
       break;
