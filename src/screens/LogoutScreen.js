@@ -1,19 +1,37 @@
 import React, { Component } from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import { AsyncStorage, SafeAreaView, Text, Button } from 'react-native';
+import PropTypes from 'prop-types';
 
 class LogoutScreen extends Component {
   static navigationOptions = {
     title: 'Logout',
   };
+
+  _onPressLogout = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('UnauthModal');
+  };
   
   render() {
     return (
       <SafeAreaView style={styles.containerStyle}>
-        <Text>This is LogoutScreen</Text>
+        <Text>Are you sure to Logout?</Text>
+        <Button
+          title={'No'}
+          onPress={() => {this.props.navigation.pop()}}
+        />
+        <Button
+          title={'yes'}
+          onPress={() => this._onPressLogout()}
+        />
       </SafeAreaView>
     );
   }
 }
+
+LogoutScreen.propTypes = {
+  navigation: PropTypes.object,
+};
 
 const styles = {
   containerStyle: {

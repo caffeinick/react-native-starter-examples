@@ -1,19 +1,39 @@
 import React, { Component } from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import { AsyncStorage, SafeAreaView, Text, Button } from 'react-native';
+import PropTypes from 'prop-types';
 
 class UserInfoScreen extends Component {
   static navigationOptions = {
     title: 'MyInfo',
   };
+
+  state = {
+    userToken: '',
+  };
+
+  componentDidMount() {
+    AsyncStorage.getItem('userToken')
+    .then(value => {
+      this.setState({ userToken: value });
+    });
+  }
   
   render() {
     return (
       <SafeAreaView style={styles.containerStyle}>
-        <Text>This is UserInfoScreen</Text>
+        <Text>Your ID is : {this.state.userToken}</Text>
+        <Button
+          title={'Logout'}
+          onPress={() => {this.props.navigation.navigate('Logout')}}
+        />
       </SafeAreaView>
     );
   }
 }
+
+UserInfoScreen.propTypes = {
+  navigation: PropTypes.object,
+};
 
 const styles = {
   containerStyle: {
