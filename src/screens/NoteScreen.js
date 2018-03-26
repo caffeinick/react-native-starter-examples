@@ -23,7 +23,7 @@ class NoteScreen extends Component {
         <View style={{ marginLeft: 20 }}>
           <Ionicons
             name={'ios-list'}
-            size={25}
+            size={35}
             color={'white'}
             onPress={() => {
               navigation.navigate('DrawerToggle');
@@ -31,6 +31,7 @@ class NoteScreen extends Component {
           />
         </View>
       ),
+      drawerLabel: 'See Note',
     })
   };
 

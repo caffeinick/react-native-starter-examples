@@ -1,14 +1,38 @@
 import React, { Component } from 'react';
-import { View, Button, Alert, SafeAreaView, Text } from 'react-native';
+import { View, Alert, SafeAreaView, Text, BackHandler } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import PropTypes from 'prop-types';
 
 class NoteDetailScreen extends Component {
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleOK.bind(this))
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress');
+  }
+
+  handleOK() {
+    Alert.alert(
+      'Are you sure?',
+      '',
+      [
+        {text: 'Cancel', style: 'cancel'},
+        {text: 'OK', onPress: () => this.props.navigation.pop()}
+      ],
+    );
+    return true;
+  }
+
   static navigationOptions = ({ navigation }) => {
     return ({
       title: 'Details',
       headerLeft: (
-        <View style={{ marginLeft: 10 }}>
-          <Button
-            title={'Cancel'}
+        <View style={{ marginLeft: 20 }}>
+          <Ionicons
+            name={'ios-close'}
+            size={40}
+            color={'white'}
             onPress={() => {
               Alert.alert(
                 'Are you sure?',
@@ -20,7 +44,6 @@ class NoteDetailScreen extends Component {
                 { cancelable: false }
               )
             }}
-            color={'white'}
           />
         </View>
       )
@@ -35,6 +58,10 @@ class NoteDetailScreen extends Component {
     );
   }
 }
+
+NoteDetailScreen.propTypes = {
+  navigation: PropTypes.object,
+};
 
 const styles = {
   containerStyle: {

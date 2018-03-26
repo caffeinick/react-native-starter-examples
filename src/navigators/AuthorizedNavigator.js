@@ -6,8 +6,15 @@ const routeConfig = {
   NoteNav: {
     screen: NoteModalNavigator,
   },
-}
+};
 
-const AuthorizedNavigator = DrawerNavigator(routeConfig);
+const navigatorConfig = {
+  contentOptions: {
+    activeTintColor: 'white',
+    activeBackgroundColor: 'silver'
+  },
+};
+
+const AuthorizedNavigator = DrawerNavigator(routeConfig, navigatorConfig);
 
 export default AuthorizedNavigator;
