@@ -18,7 +18,19 @@ class NoteScreen extends Component {
             }}
           />
         </View>
-      )
+      ),
+      headerLeft: (
+        <View style={{ marginLeft: 20 }}>
+          <Ionicons
+            name={'ios-list'}
+            size={25}
+            color={'white'}
+            onPress={() => {
+              navigation.navigate('DrawerToggle');
+            }}
+          />
+        </View>
+      ),
     })
   };
 
