@@ -23,7 +23,7 @@ class LoadingScreen extends Component {
     return (
       <View style={styles.containerStyle}>
         <ActivityIndicator />
-        <StatusBar barStyle="default" />
+        <StatusBar hidden={true} />
       </View>
     );
   }

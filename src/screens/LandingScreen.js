@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View, Text } from 'react-native';
+import { SafeAreaView, StatusBar, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { Button } from '../components/Button';
@@ -15,6 +15,8 @@ class LandingScreen extends Component {
 
     return (
       <SafeAreaView style={containerStyle}>
+        <StatusBar hidden={true} />
+        
         <View style={marginContainerStyle}>
           <Text style={titleStyle}>Welcome!</Text>
         </View>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, SafeAreaView, Button } from 'react-native';
+import { StatusBar, View, SafeAreaView, Button } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import PropTypes from 'prop-types';
 
@@ -37,6 +37,7 @@ class NoteScreen extends Component {
   render() {
     return (
       <SafeAreaView style={styles.containerStyle}>
+        <StatusBar barStyle='light-content' />
         <Button
           title={'Open Note'}
           onPress={() => {
