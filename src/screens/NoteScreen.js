@@ -10,11 +10,11 @@ class NoteScreen extends Component {
   componentDidMount() {
     this.props.navigation.setParams({
       onNavigateTo: this.onNavigateTo.bind(this)
-    })
+    });
   }
 
-  onNavigateTo(path) {
-    this.props.navigateTo(path)
+  onNavigateTo(path, params) {
+    this.props.navigateTo(path, params);
   }
   
   static navigationOptions = ({ navigation }) => {
@@ -58,15 +58,16 @@ class NoteScreen extends Component {
       <SafeAreaView style={styles.containerStyle}>
         <StatusBar barStyle='light-content' />
         <Button
+          ref={ c => {this.testRef = c;}}
           title={'Open Note'}
           onPress={() => {
-            this.onNavigateTo('NoteModal')
+            this.onNavigateTo('NoteModal', { title: 'Open Note' })
           }}
         />
         <Button
           title={'New Note'}
           onPress={() => {
-            this.onNavigateTo('NoteModal')
+            this.onNavigateTo('NoteModal', { title: 'New Note' })
           }}
         />
 

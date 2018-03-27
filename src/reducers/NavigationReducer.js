@@ -13,6 +13,7 @@ function NavigationReducer(state = initialNavState, action) {
       nextState = RootNavigator.router.getStateForAction(
         NavigationActions.navigate({
           routeName: action.payload.routeName,
+          params: action.params,
         }),
         state
       );
