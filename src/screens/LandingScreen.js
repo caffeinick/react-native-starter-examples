@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { SafeAreaView, StatusBar, View, Text } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { navigateTo } from '../actions/nav';
 import { Button } from '../components/Button';
 
 class LandingScreen extends Component {
+  onNavigateTo(path) {
+    this.props.navigateTo(path);
+  }
+
   render() {
     const {
       containerStyle,
@@ -23,15 +29,15 @@ class LandingScreen extends Component {
 
         <View style={bodyStyle}>
           <Button
-            onPress={() => {this.props.navigation.navigate('Login')}}
+            onPress={() => {this.onNavigateTo('Login')}}
             title={'Login'}
           />
           <Button
-            onPress={() => {this.props.navigation.navigate('Signup')}}
+            onPress={() => {this.onNavigateTo('Signup')}}
             title={'Sign Up'}
           />
           <Button
-            onPress={() => {this.props.navigation.navigate('AuthDrawer')}}
+            onPress={() => {this.onNavigateTo('AuthDrawer')}}
             title={'Go App Directly'}
           />
         </View>
@@ -42,6 +48,7 @@ class LandingScreen extends Component {
 
 LandingScreen.propTypes = {
   navigation: PropTypes.object,
+  navigateTo: PropTypes.func,
 };
 
 const styles = {
@@ -66,4 +73,4 @@ const styles = {
     },
 };
 
-export default LandingScreen;
+export default connect(null, { navigateTo })(LandingScreen);

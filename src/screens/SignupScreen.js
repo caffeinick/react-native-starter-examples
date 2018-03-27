@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { SafeAreaView, View, Text, AsyncStorage } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { navigateTo } from '../actions/nav';
 import { Button } from '../components/Button';
 
 class SignupScreen extends Component {
   _signInAsync = async () => {
     await AsyncStorage.setItem('userToken', 'Admin');
-    this.props.navigation.navigate('AuthDrawer');
+    this.props.navigateTo('AuthDrawer');
   };
 
   render() {
@@ -41,6 +43,7 @@ class SignupScreen extends Component {
 
 SignupScreen.propTypes = {
   navigation: PropTypes.object,
+  navigateTo: PropTypes.func,
 };
 
 const styles = {
@@ -65,4 +68,4 @@ const styles = {
     },
 };
 
-export default SignupScreen;
+export default connect(null, { navigateTo })(SignupScreen);
