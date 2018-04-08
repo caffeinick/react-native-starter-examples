@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { AsyncStorage, SafeAreaView, Text, Button } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { navigateTo } from '../actions/nav';
 
 class LogoutScreen extends Component {
   static navigationOptions = {
@@ -9,7 +12,7 @@ class LogoutScreen extends Component {
 
   _onPressLogout = async () => {
     await AsyncStorage.clear();
-    this.props.navigation.navigate('UnauthModal');
+    this.props.navigateTo('UnauthModal');
   };
   
   render() {
@@ -31,6 +34,7 @@ class LogoutScreen extends Component {
 
 LogoutScreen.propTypes = {
   navigation: PropTypes.object,
+  navigateTo: PropTypes.func,
 };
 
 const styles = {
@@ -41,4 +45,4 @@ const styles = {
   },
 };
 
-export default LogoutScreen;
+export default connect(null, { navigateTo })(LogoutScreen);

@@ -53,7 +53,9 @@ class NoteDetailScreen extends Component {
   render() {
     return (
       <SafeAreaView style={styles.containerStyle}>
-        <Text>This is NoteDetailScreen</Text>
+        <Text>
+          You just clicked {this.props.navigation.state.params.title}
+        </Text>
       </SafeAreaView>
     );
   }

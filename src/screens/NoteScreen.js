@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
 import { StatusBar, View, SafeAreaView, Button } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { navigateTo } from '../actions/nav';
+
 class NoteScreen extends Component {
+  componentDidMount() {
+    this.props.navigation.setParams({
+      onNavigateTo: this.onNavigateTo.bind(this)
+    });
+  }
+
+  onNavigateTo(path, params) {
+    this.props.navigateTo(path, params);
+  }
+  
   static navigationOptions = ({ navigation }) => {
     return ({
       title: 'Note',
@@ -14,8 +27,13 @@ class NoteScreen extends Component {
             size={25}
             color={'white'}
             onPress={() => {
-              navigation.navigate('Search');
-            }}
+              if (navigation.state.params) {
+                if (navigation.state.params.onNavigateTo) {
+                  const { onNavigateTo } = navigation.state.params;
+                  return onNavigateTo('Search');
+                }
+              }}
+            }
           />
         </View>
       ),
@@ -26,13 +44,13 @@ class NoteScreen extends Component {
             size={35}
             color={'white'}
             onPress={() => {
-              navigation.navigate('DrawerToggle');
-            }}
+              navigation.navigate('DrawerToggle')}
+            }
           />
         </View>
       ),
       drawerLabel: 'See Note',
-    })
+    });
   };
 
   render() {
@@ -40,22 +58,23 @@ class NoteScreen extends Component {
       <SafeAreaView style={styles.containerStyle}>
         <StatusBar barStyle='light-content' />
         <Button
+          ref={ c => {this.testRef = c;}}
           title={'Open Note'}
           onPress={() => {
-            this.props.navigation.navigate('NoteModal')
+            this.onNavigateTo('NoteModal', { title: 'Open Note' })
           }}
         />
         <Button
           title={'New Note'}
           onPress={() => {
-            this.props.navigation.navigate('NoteModal')
+            this.onNavigateTo('NoteModal', { title: 'New Note' })
           }}
         />
 
         <Button
           title={'Go to LoginPage'}
           onPress={() => {
-            this.props.navigation.navigate('UnauthModal')
+            this.onNavigateTo('UnauthModal')
           }}
         />
       </SafeAreaView>
@@ -64,7 +83,8 @@ class NoteScreen extends Component {
 }
 
 NoteScreen.propTypes = {
-  navigation: PropTypes.object
+  navigation: PropTypes.object,
+  navigateTo: PropTypes.func,
 };
 
 const styles = {
@@ -75,4 +95,4 @@ const styles = {
   },
 };
 
-export default NoteScreen;
+export default connect(null, { navigateTo })(NoteScreen);

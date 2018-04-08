@@ -6,11 +6,17 @@ import {
   Text,
   AsyncStorage,
 } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { navigateTo } from '../actions/nav';
 import { Button } from '../components/Button';
 
 class LoginScreen extends Component {
+  onNavigateTo (path) {
+    this.props.navigateTo(path);
+  }
+
   _signInAsync = async () => {
     await AsyncStorage.setItem('userToken', 'Admin');
     this.props.navigation.navigate('AuthDrawer');
@@ -32,7 +38,7 @@ class LoginScreen extends Component {
         <View style={headerStyle}>
           <TouchableOpacity 
             style={passButton}
-            onPress={() => {this.props.navigation.navigate('PasswordModal')}}
+            onPress={() => {this.onNavigateTo('PasswordModal')}}
           >
             <Text style={passButtonTitle}>
               Forgot Password?
@@ -50,7 +56,7 @@ class LoginScreen extends Component {
             title={'Login as Admin'}
           />
           <Button
-            onPress={() => {this.props.navigation.navigate('Signup')}}
+            onPress={() => {this.onNavigateTo('Signup')}}
             title={'Sign Up'}
           />
           <Button
@@ -65,6 +71,7 @@ class LoginScreen extends Component {
 
 LoginScreen.propTypes = {
   navigation: PropTypes.object,
+  navigateTo: PropTypes.func,
 };
 
 const styles = {
@@ -108,4 +115,4 @@ const styles = {
     },
 };
 
-export default LoginScreen;
+export default connect(null, { navigateTo })(LoginScreen);

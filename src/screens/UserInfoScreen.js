@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { AsyncStorage, SafeAreaView, Text, Button } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { navigateTo } from '../actions/nav';
 
 class UserInfoScreen extends Component {
   static navigationOptions = {
@@ -24,7 +27,7 @@ class UserInfoScreen extends Component {
         <Text>Your ID is : {this.state.userToken}</Text>
         <Button
           title={'Logout'}
-          onPress={() => {this.props.navigation.navigate('Logout')}}
+          onPress={() => {this.props.navigateTo('Logout')}}
         />
       </SafeAreaView>
     );
@@ -33,6 +36,7 @@ class UserInfoScreen extends Component {
 
 UserInfoScreen.propTypes = {
   navigation: PropTypes.object,
+  navigateTo: PropTypes.func,
 };
 
 const styles = {
@@ -43,4 +47,4 @@ const styles = {
   },
 };
 
-export default UserInfoScreen;
+export default connect(null, { navigateTo })(UserInfoScreen);

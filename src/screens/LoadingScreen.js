@@ -5,7 +5,10 @@ import {
   ActivityIndicator,
   StatusBar,
 } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { navigateTo } from '../actions/nav';
 
 class LoadingScreen extends Component {
   constructor() {
@@ -16,7 +19,7 @@ class LoadingScreen extends Component {
   _bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
 
-    this.props.navigation.navigate(userToken ? 'AuthDrawer' : 'UnauthModal')
+    this.props.navigateTo(userToken ? 'AuthDrawer' : 'UnauthModal')
   };
 
   render() {
@@ -31,6 +34,7 @@ class LoadingScreen extends Component {
 
 LoadingScreen.propTypes = {
   navigation: PropTypes.object,
+  navigateTo: PropTypes.func,
 };
 
 const styles = {
@@ -41,4 +45,4 @@ const styles = {
   },
 };
 
-export default LoadingScreen;
+export default connect(null, { navigateTo })(LoadingScreen);
