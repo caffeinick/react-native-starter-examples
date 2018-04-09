@@ -7,16 +7,14 @@ const Button = ({ onPress, title }) => {
 
   return (
     <TouchableOpacity style={buttonStyle} onPress={onPress}>
-      <Text style={textStyle}>
-        {title}
-      </Text>
+      <Text style={textStyle}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
 Button.propTypes = {
   onPress: PropTypes.func,
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 const styles = {
@@ -36,7 +34,7 @@ const styles = {
     color: '#F0B800',
     fontSize: 20,
     fontWeight: 'bold',
-  }
+  },
 };
 
 export { Button };

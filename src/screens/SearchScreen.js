@@ -5,7 +5,7 @@ class SearchScreen extends Component {
   static navigationOptions = {
     title: 'Search',
   };
-  
+
   render() {
     return (
       <SafeAreaView style={styles.containerStyle}>

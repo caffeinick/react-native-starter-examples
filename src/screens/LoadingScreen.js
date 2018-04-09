@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import {
-  AsyncStorage,
-  View,
-  ActivityIndicator,
-  StatusBar,
-} from 'react-native';
+import { AsyncStorage, View, ActivityIndicator, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { navigateTo } from '../actions/nav';
+import { navigateTo } from '../actions';
 
 class LoadingScreen extends Component {
   constructor() {
@@ -19,7 +14,7 @@ class LoadingScreen extends Component {
   _bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
 
-    this.props.navigateTo(userToken ? 'AuthDrawer' : 'UnauthModal')
+    this.props.navigateTo(userToken ? 'AuthDrawer' : 'UnauthModal');
   };
 
   render() {

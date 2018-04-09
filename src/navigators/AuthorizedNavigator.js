@@ -11,7 +11,7 @@ const routeConfig = {
 const navigatorConfig = {
   contentOptions: {
     activeTintColor: 'white',
-    activeBackgroundColor: 'silver'
+    activeBackgroundColor: 'silver',
   },
 };
 

@@ -3,7 +3,7 @@ import { AsyncStorage, SafeAreaView, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { navigateTo } from '../actions/nav';
+import { navigateTo } from '../actions';
 
 class LogoutScreen extends Component {
   static navigationOptions = {
@@ -14,19 +14,18 @@ class LogoutScreen extends Component {
     await AsyncStorage.clear();
     this.props.navigateTo('UnauthModal');
   };
-  
+
   render() {
     return (
       <SafeAreaView style={styles.containerStyle}>
         <Text>Are you sure to Logout?</Text>
         <Button
           title={'No'}
-          onPress={() => {this.props.navigation.pop()}}
+          onPress={() => {
+            this.props.navigation.pop();
+          }}
         />
-        <Button
-          title={'yes'}
-          onPress={() => this._onPressLogout()}
-        />
+        <Button title={'yes'} onPress={() => this._onPressLogout()} />
       </SafeAreaView>
     );
   }

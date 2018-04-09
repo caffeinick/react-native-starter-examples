@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 class NoteDetailScreen extends Component {
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.handleOK.bind(this))
+    BackHandler.addEventListener('hardwareBackPress', this.handleOK.bind(this));
   }
 
   componentWillUnmount() {
@@ -13,19 +13,15 @@ class NoteDetailScreen extends Component {
   }
 
   handleOK() {
-    Alert.alert(
-      'Are you sure?',
-      '',
-      [
-        {text: 'Cancel', style: 'cancel'},
-        {text: 'OK', onPress: () => this.props.navigation.pop()}
-      ],
-    );
+    Alert.alert('Are you sure?', '', [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'OK', onPress: () => this.props.navigation.pop() },
+    ]);
     return true;
   }
 
   static navigationOptions = ({ navigation }) => {
-    return ({
+    return {
       title: 'Details',
       headerLeft: (
         <View style={{ marginLeft: 20 }}>
@@ -38,24 +34,22 @@ class NoteDetailScreen extends Component {
                 'Are you sure?',
                 '',
                 [
-                  {text: 'Cancel', style: 'cancel'},
-                  {text: 'OK', onPress: () => navigation.pop()}
+                  { text: 'Cancel', style: 'cancel' },
+                  { text: 'OK', onPress: () => navigation.pop() },
                 ],
-                { cancelable: false }
-              )
+                { cancelable: false },
+              );
             }}
           />
         </View>
-      )
-    })
+      ),
+    };
   };
-  
+
   render() {
     return (
       <SafeAreaView style={styles.containerStyle}>
-        <Text>
-          You just clicked {this.props.navigation.state.params.title}
-        </Text>
+        <Text>You just clicked {this.props.navigation.state.params.title}</Text>
       </SafeAreaView>
     );
   }
