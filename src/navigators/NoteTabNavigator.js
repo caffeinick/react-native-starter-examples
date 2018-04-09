@@ -4,12 +4,19 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import NoteScreen from '../screens/NoteScreen';
 import UserStack from './UserInfoNavigator';
+import LibraryStack from './LibraryNavigator';
 import CounterStack from './CounterNavigator';
 
 const routeConfig = {
   Note: NoteScreen,
   Counter: {
     screen: CounterStack,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Library: {
+    screen: LibraryStack,
     navigationOptions: {
       header: null,
     },
@@ -31,6 +38,8 @@ const tabConfig = {
         iconName = `ios-create${focused ? '' : '-outline'}`;
       } else if (routeName === 'Counter') {
         iconName = `ios-add-circle${focused ? '' : '-outline'}`;
+      } else if (routeName === 'Library') {
+        iconName = `ios-list-box${focused ? '' : '-outline'}`;
       } else if (routeName === 'User') {
         iconName = `ios-contact${focused ? '' : '-outline'}`;
       }

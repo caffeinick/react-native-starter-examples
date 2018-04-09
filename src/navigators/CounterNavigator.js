@@ -9,6 +9,7 @@ const routeConfig = {
 };
 
 const navigationConfig = {
+  initialRouteName: 'Counter',
   navigationOptions: {
     headerStyle: {
       backgroundColor: '#F0B800',
