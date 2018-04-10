@@ -3,7 +3,7 @@ import { AsyncStorage, SafeAreaView, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { navigateTo } from '../actions/nav';
+import { navigateTo } from '../actions';
 
 class UserInfoScreen extends Component {
   static navigationOptions = {
@@ -15,19 +15,20 @@ class UserInfoScreen extends Component {
   };
 
   componentDidMount() {
-    AsyncStorage.getItem('userToken')
-    .then(value => {
+    AsyncStorage.getItem('userToken').then(value => {
       this.setState({ userToken: value });
     });
   }
-  
+
   render() {
     return (
       <SafeAreaView style={styles.containerStyle}>
         <Text>Your ID is : {this.state.userToken}</Text>
         <Button
           title={'Logout'}
-          onPress={() => {this.props.navigateTo('Logout')}}
+          onPress={() => {
+            this.props.navigateTo('Logout');
+          }}
         />
       </SafeAreaView>
     );

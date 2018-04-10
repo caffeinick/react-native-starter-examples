@@ -4,21 +4,21 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { navigateTo } from '../actions/nav';
+import { navigateTo } from '../actions';
 
 class NoteScreen extends Component {
   componentDidMount() {
     this.props.navigation.setParams({
-      onNavigateTo: this.onNavigateTo.bind(this)
+      onNavigateTo: this.onNavigateTo.bind(this),
     });
   }
 
   onNavigateTo(path, params) {
     this.props.navigateTo(path, params);
   }
-  
+
   static navigationOptions = ({ navigation }) => {
-    return ({
+    return {
       title: 'Note',
       headerRight: (
         <View style={{ marginRight: 20 }}>
@@ -28,12 +28,13 @@ class NoteScreen extends Component {
             color={'white'}
             onPress={() => {
               if (navigation.state.params) {
-                if (navigation.state.params.onNavigateTo) {
-                  const { onNavigateTo } = navigation.state.params;
+                const params = navigation.state.params;
+                if (params.onNavigateTo) {
+                  const { onNavigateTo } = params;
                   return onNavigateTo('Search');
                 }
-              }}
-            }
+              }
+            }}
           />
         </View>
       ),
@@ -44,37 +45,39 @@ class NoteScreen extends Component {
             size={35}
             color={'white'}
             onPress={() => {
-              navigation.navigate('DrawerToggle')}
-            }
+              navigation.navigate('DrawerToggle');
+            }}
           />
         </View>
       ),
       drawerLabel: 'See Note',
-    });
+    };
   };
 
   render() {
     return (
       <SafeAreaView style={styles.containerStyle}>
-        <StatusBar barStyle='light-content' />
+        <StatusBar barStyle="light-content" />
         <Button
-          ref={ c => {this.testRef = c;}}
+          ref={c => {
+            this.testRef = c;
+          }}
           title={'Open Note'}
           onPress={() => {
-            this.onNavigateTo('NoteModal', { title: 'Open Note' })
+            this.onNavigateTo('NoteModal', { title: 'Open Note' });
           }}
         />
         <Button
           title={'New Note'}
           onPress={() => {
-            this.onNavigateTo('NoteModal', { title: 'New Note' })
+            this.onNavigateTo('NoteModal', { title: 'New Note' });
           }}
         />
 
         <Button
           title={'Go to LoginPage'}
           onPress={() => {
-            this.onNavigateTo('UnauthModal')
+            this.onNavigateTo('UnauthModal');
           }}
         />
       </SafeAreaView>

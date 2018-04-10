@@ -20,11 +20,10 @@ const navigationConfig = {
 
 export const RootNavigator = SwitchNavigator(routeConfig, navigationConfig);
 
-
 class AppWithNavigationState extends Component {
   render() {
     const { dispatch, nav } = this.props;
-    
+
     return (
       <RootNavigator
         navigation={{
