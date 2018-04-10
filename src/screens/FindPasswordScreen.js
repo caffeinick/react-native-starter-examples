@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { SafeAreaView, View, Text } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { navigatePop } from '../actions';
 import { Button } from '../components/common/Button';
 
 class FindPasswordScreen extends Component {
+  onNavigatePop() {
+    this.props.navigatePop();
+  }
+
   render() {
     const { containerStyle, marginContainerStyle, titleStyle, bodyStyle } = styles;
 
@@ -18,7 +24,7 @@ class FindPasswordScreen extends Component {
         <View style={bodyStyle}>
           <Button
             onPress={() => {
-              this.props.navigation.pop();
+              this.onNavigatePop();
             }}
             title={'I will not forget never again!'}
           />
@@ -29,7 +35,7 @@ class FindPasswordScreen extends Component {
 }
 
 FindPasswordScreen.propTypes = {
-  navigation: PropTypes.object,
+  navigatePop: PropTypes.func,
 };
 
 const styles = {
@@ -54,4 +60,4 @@ const styles = {
   },
 };
 
-export default FindPasswordScreen;
+export default connect(null, { navigatePop })(FindPasswordScreen);

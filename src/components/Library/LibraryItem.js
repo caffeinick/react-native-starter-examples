@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { navigateTo } from '../../actions';
+
 class LibraryItem extends Component {
+  onNavigateTo(path, params) {
+    this.props.navigateTo(path, params);
+  }
+
   render() {
     const { title, description } = this.props.item;
     const { containerStyle, itemStyle } = styles;
@@ -11,7 +17,7 @@ class LibraryItem extends Component {
     return (
       <TouchableOpacity
         onPress={() =>
-          this.props.navigation.navigate('LibraryDetail', {
+          this.onNavigateTo('LibraryDetail', {
             title,
             description,
           })
@@ -42,4 +48,4 @@ const styles = {
   },
 };
 
-export default withNavigation(LibraryItem);
+export default connect(null, { navigateTo })(LibraryItem);

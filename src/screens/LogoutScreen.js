@@ -3,7 +3,7 @@ import { AsyncStorage, SafeAreaView, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { navigateTo } from '../actions';
+import { navigateTo, navigatePop } from '../actions';
 
 class LogoutScreen extends Component {
   static navigationOptions = {
@@ -22,7 +22,7 @@ class LogoutScreen extends Component {
         <Button
           title={'No'}
           onPress={() => {
-            this.props.navigation.pop();
+            this.props.navigatePop();
           }}
         />
         <Button title={'yes'} onPress={() => this._onPressLogout()} />
@@ -32,8 +32,8 @@ class LogoutScreen extends Component {
 }
 
 LogoutScreen.propTypes = {
-  navigation: PropTypes.object,
   navigateTo: PropTypes.func,
+  navigatePop: PropTypes.func,
 };
 
 const styles = {
@@ -44,4 +44,4 @@ const styles = {
   },
 };
 
-export default connect(null, { navigateTo })(LogoutScreen);
+export default connect(null, { navigateTo, navigatePop })(LogoutScreen);

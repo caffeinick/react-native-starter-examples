@@ -3,7 +3,7 @@ import { SafeAreaView, View, TouchableOpacity, Text, AsyncStorage } from 'react-
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { navigateTo } from '../actions';
+import { navigateTo, navigatePop } from '../actions';
 import { Button } from '../components/common/Button';
 
 class LoginScreen extends Component {
@@ -11,9 +11,13 @@ class LoginScreen extends Component {
     this.props.navigateTo(path);
   }
 
+  onNavigatePop() {
+    this.props.navigatePop();
+  }
+
   _signInAsync = async () => {
     await AsyncStorage.setItem('userToken', 'Admin');
-    this.props.navigation.navigate('AuthDrawer');
+    this.onNavigateTo('AuthDrawer');
   };
 
   render() {
@@ -54,7 +58,7 @@ class LoginScreen extends Component {
           />
           <Button
             onPress={() => {
-              this.props.navigation.pop();
+              this.onNavigatePop();
             }}
             title={'Maybe Later...'}
           />
@@ -65,8 +69,8 @@ class LoginScreen extends Component {
 }
 
 LoginScreen.propTypes = {
-  navigation: PropTypes.object,
   navigateTo: PropTypes.func,
+  navigatePop: PropTypes.func,
 };
 
 const styles = {
@@ -110,4 +114,4 @@ const styles = {
   },
 };
 
-export default connect(null, { navigateTo })(LoginScreen);
+export default connect(null, { navigateTo, navigatePop })(LoginScreen);

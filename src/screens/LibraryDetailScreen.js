@@ -3,10 +3,9 @@ import { SafeAreaView, ScrollView, Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 class DetailScreen extends Component {
-  static navigationOptions = {
-    title: `library`,
-    // 추후 Library에 맞는 prop을 전달받아 표시하도록 수정 필요
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params.title,
+  });
 
   render() {
     const { title, description } = this.props.navigation.state.params;

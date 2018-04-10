@@ -3,7 +3,7 @@ import { SafeAreaView, View, Text, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { navigateTo } from '../actions';
+import { navigateTo, navigatePop } from '../actions';
 import { Button } from '../components/common/Button';
 
 class SignupScreen extends Component {
@@ -11,6 +11,10 @@ class SignupScreen extends Component {
     await AsyncStorage.setItem('userToken', 'Admin');
     this.props.navigateTo('AuthDrawer');
   };
+
+  onNavigatePop() {
+    this.props.navigatePop();
+  }
 
   render() {
     const { containerStyle, marginContainerStyle, titleStyle, bodyStyle } = styles;
@@ -25,7 +29,7 @@ class SignupScreen extends Component {
           <Button onPress={this._signInAsync} title={'Sign up as Admin'} />
           <Button
             onPress={() => {
-              this.props.navigation.pop();
+              this.onNavigatePop();
             }}
             title={'Maybe Later...'}
           />
@@ -36,8 +40,8 @@ class SignupScreen extends Component {
 }
 
 SignupScreen.propTypes = {
-  navigation: PropTypes.object,
   navigateTo: PropTypes.func,
+  navigatePop: PropTypes.func,
 };
 
 const styles = {
@@ -62,4 +66,4 @@ const styles = {
   },
 };
 
-export default connect(null, { navigateTo })(SignupScreen);
+export default connect(null, { navigateTo, navigatePop })(SignupScreen);

@@ -20,6 +20,9 @@ function NavigationReducer(state = initialNavState, action) {
         state,
       );
       break;
+    case types.NAVIGATE_POP:
+      nextState = RootNavigator.router.getStateForAction(NavigationActions.pop(), state);
+      break;
     default:
       nextState = RootNavigator.router.getStateForAction(action, state);
       break;

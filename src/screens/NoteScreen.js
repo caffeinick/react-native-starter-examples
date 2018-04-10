@@ -28,8 +28,9 @@ class NoteScreen extends Component {
             color={'white'}
             onPress={() => {
               if (navigation.state.params) {
-                if (navigation.state.params.onNavigateTo) {
-                  const { onNavigateTo } = navigation.state.params;
+                const params = navigation.state.params;
+                if (params.onNavigateTo) {
+                  const { onNavigateTo } = params;
                   return onNavigateTo('Search');
                 }
               }

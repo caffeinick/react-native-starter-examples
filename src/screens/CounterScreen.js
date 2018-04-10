@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { SafeAreaView, View, TouchableOpacity, Text } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { navigateTo } from '../actions';
 
 class CounterScreen extends Component {
   static navigationOptions = {
@@ -24,6 +26,10 @@ class CounterScreen extends Component {
       count: this.state.count - 1,
     });
   };
+
+  onNavigateTo(path) {
+    this.props.navigateTo(path);
+  }
 
   render() {
     const {
@@ -53,7 +59,7 @@ class CounterScreen extends Component {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('CounterRedux')}>
+          <TouchableOpacity onPress={() => this.onNavigateTo('CounterRedux')}>
             <View style={goReduxContainerStyle}>
               <Text style={goReduxTextStyle}>Go Redux Counter &rarr;</Text>
             </View>
@@ -65,7 +71,7 @@ class CounterScreen extends Component {
 }
 
 CounterScreen.propTypes = {
-  navigation: PropTypes.object,
+  navigateTo: PropTypes.func,
 };
 
 const styles = {
@@ -110,4 +116,4 @@ const styles = {
   },
 };
 
-export default withNavigation(CounterScreen);
+export default connect(null, { navigateTo })(CounterScreen);
