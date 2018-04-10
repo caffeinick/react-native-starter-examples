@@ -73,7 +73,12 @@ class NoteScreen extends Component {
             this.onNavigateTo('NoteModal', { title: 'New Note' });
           }}
         />
-
+        <Button
+          title={'Open Stack(Modal)'}
+          onPress={() => {
+            this.onNavigateTo('SimpleStack', { title: 'Simple Modal' });
+          }}
+        />
         <Button
           title={'Go to LoginPage'}
           onPress={() => {

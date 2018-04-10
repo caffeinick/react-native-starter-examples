@@ -2,6 +2,7 @@ import { StackNavigator } from 'react-navigation';
 
 import NoteStack from './NoteStackNavigator';
 import NoteDetail from '../screens/NoteDetailScreen';
+import SimpleStack from './SimpleStackNavigator';
 
 const routeConfig = {
   NoteStack: {
@@ -12,6 +13,12 @@ const routeConfig = {
   },
   NoteModal: {
     screen: NoteDetail,
+  },
+  SimpleStack: {
+    screen: SimpleStack,
+    navigationOptions: {
+      header: null,
+    },
   },
 };
 
