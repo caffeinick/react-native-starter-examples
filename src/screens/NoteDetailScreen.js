@@ -8,14 +8,14 @@ import { navigatePop } from '../actions';
 
 class NoteDetailScreen extends Component {
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.handleOK.bind(this));
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleOK.bind(this));
     this.props.navigation.setParams({
       handleOK: this.handleOK.bind(this),
     });
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress');
+    this.backHandler.remove();
   }
 
   onNavigatePop() {
@@ -25,7 +25,12 @@ class NoteDetailScreen extends Component {
   handleOK() {
     Alert.alert('Are you sure?', '', [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'OK', onPress: () => this.onNavigatePop() },
+      {
+        text: 'OK',
+        onPress: () => {
+          this.onNavigatePop();
+        },
+      },
     ]);
     return true;
   }
