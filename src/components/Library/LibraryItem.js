@@ -33,7 +33,7 @@ class LibraryItem extends Component {
 
 LibraryItem.propTypes = {
   item: PropTypes.object,
-  navigation: PropTypes.object,
+  navigateTo: PropTypes.func,
 };
 
 const styles = {

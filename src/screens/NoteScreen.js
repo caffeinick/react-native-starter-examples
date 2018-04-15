@@ -13,8 +13,8 @@ class NoteScreen extends Component {
     });
   }
 
-  onNavigateTo(path, params) {
-    this.props.navigateTo(path, params);
+  onNavigateTo(path) {
+    this.props.navigateTo(path);
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -45,7 +45,13 @@ class NoteScreen extends Component {
             size={35}
             color={'white'}
             onPress={() => {
-              navigation.navigate('DrawerToggle');
+              if (navigation.state.params) {
+                const params = navigation.state.params;
+                if (params.onNavigateTo) {
+                  const { onNavigateTo } = params;
+                  return onNavigateTo('DrawerToggle');
+                }
+              }
             }}
           />
         </View>
