@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import { View, Alert, SafeAreaView, Text, BackHandler } from 'react-native';
+import {
+  View,
+  Alert,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  TextInput,
+  ScrollView,
+  Platform,
+  BackHandler,
+} from 'react-native';
 import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 
-import { navigatePop } from '../actions';
+import { navigatePop, noteTextChange } from '../actions';
 
 class NoteDetailScreen extends Component {
   componentDidMount() {
@@ -20,6 +29,10 @@ class NoteDetailScreen extends Component {
 
   onNavigatePop() {
     this.props.navigatePop();
+  }
+
+  onTextChange(text) {
+    this.props.noteTextChange({ text });
   }
 
   handleOK() {
@@ -58,9 +71,23 @@ class NoteDetailScreen extends Component {
   });
 
   render() {
+    const { containerStyle, noteAreaStyle } = styles;
     return (
-      <SafeAreaView style={styles.containerStyle}>
-        <Text>You just clicked {this.props.navigation.state.params.title}</Text>
+      <SafeAreaView style={containerStyle}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : null}
+          keyboardVerticalOffset={60} // iOS Keyboard Height Calibrate
+          style={{ flex: 1 }}
+        >
+          <TextInput
+            style={noteAreaStyle}
+            onChangeText={text => this.onTextChange(text)}
+            value={this.props.note}
+            multiline={true}
+            spellCheck={false}
+            autoCorrect={false}
+          />
+        </KeyboardAvoidingView>
       </SafeAreaView>
     );
   }
@@ -69,14 +96,26 @@ class NoteDetailScreen extends Component {
 NoteDetailScreen.propTypes = {
   navigation: PropTypes.object,
   navigatePop: PropTypes.func,
+  noteTextChange: PropTypes.func,
 };
 
 const styles = {
   containerStyle: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+  noteAreaStyle: {
+    height: '100%',
+    backgroundColor: 'white',
+    paddingTop: 10,
+    paddingBottom: 25,
+    paddingHorizontal: 15,
+    fontSize: 20,
   },
 };
 
-export default connect(null, { navigatePop })(NoteDetailScreen);
+const mapStateToProps = state => {
+  return { note: state.note };
+};
+
+export default connect(mapStateToProps, { navigatePop, noteTextChange })(NoteDetailScreen);
