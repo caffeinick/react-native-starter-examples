@@ -9,9 +9,12 @@ const routeConfig = {
 };
 
 const navigatorConfig = {
+  navigationOptions: {
+    drawerLabel: 'See Examples',
+  },
   contentOptions: {
     activeTintColor: 'white',
-    activeBackgroundColor: 'silver',
+    activeBackgroundColor: '#F0B800',
   },
 };
 

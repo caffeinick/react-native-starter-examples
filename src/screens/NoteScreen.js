@@ -56,7 +56,6 @@ class NoteScreen extends Component {
           />
         </View>
       ),
-      drawerLabel: 'See Note',
     };
   };
 
