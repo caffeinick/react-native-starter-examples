@@ -5,15 +5,15 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
   TextInput,
-  ScrollView,
   Platform,
   BackHandler,
+  AsyncStorage,
 } from 'react-native';
 import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 
-import { navigatePop, noteTextChange } from '../actions';
+import { navigatePop, noteTextChange, noteLoad } from '../actions';
 
 class NoteDetailScreen extends Component {
   componentDidMount() {
@@ -21,6 +21,7 @@ class NoteDetailScreen extends Component {
     this.props.navigation.setParams({
       handleOK: this.handleOK.bind(this),
     });
+    this.onNoteLoad();
   }
 
   componentWillUnmount() {
@@ -35,12 +36,26 @@ class NoteDetailScreen extends Component {
     this.props.noteTextChange({ text });
   }
 
+  async onNoteLoad() {
+    if (this.props.navigation.state.params) {
+      const params = this.props.navigation.state.params;
+      if (params.title == 'Open') {
+        const text = await AsyncStorage.getItem('noteItem');
+        if (text) this.props.noteLoad({ text });
+      } else {
+        const text = '';
+        this.props.noteTextChange({ text });
+      }
+    }
+  }
+
   handleOK() {
     Alert.alert('Are you sure?', '', [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'OK',
-        onPress: () => {
+        onPress: async () => {
+          await AsyncStorage.setItem('noteItem', this.props.note);
           this.onNavigatePop();
         },
       },
@@ -95,8 +110,10 @@ class NoteDetailScreen extends Component {
 
 NoteDetailScreen.propTypes = {
   navigation: PropTypes.object,
+  note: PropTypes.string,
   navigatePop: PropTypes.func,
   noteTextChange: PropTypes.func,
+  noteLoad: PropTypes.func,
 };
 
 const styles = {
@@ -118,4 +135,6 @@ const mapStateToProps = state => {
   return { note: state.note };
 };
 
-export default connect(mapStateToProps, { navigatePop, noteTextChange })(NoteDetailScreen);
+export default connect(mapStateToProps, { navigatePop, noteTextChange, noteLoad })(
+  NoteDetailScreen,
+);

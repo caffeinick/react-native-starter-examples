@@ -4,9 +4,9 @@ import { createStore, applyMiddleware } from 'redux';
 
 import AppReducer from './reducers';
 import RootNavigator from './navigators/RootNavigator';
-import { middleware, logger } from './utils/redux';
+import { middleware, logger, ReduxThunk } from './utils/redux';
 
-const middlewares = [middleware];
+const middlewares = [middleware, ReduxThunk];
 
 // eslint-disable-next-line no-undef
 if (process.env.NODE_ENV === 'development') {
