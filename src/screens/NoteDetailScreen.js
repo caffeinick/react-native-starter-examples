@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import { View, Alert, SafeAreaView, Text, BackHandler } from 'react-native';
+import {
+  View,
+  Alert,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  TextInput,
+  Platform,
+  BackHandler,
+  AsyncStorage,
+} from 'react-native';
 import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 
-import { navigatePop } from '../actions';
+import { navigatePop, noteTextChange, noteLoad } from '../actions';
 
 class NoteDetailScreen extends Component {
   componentDidMount() {
@@ -12,6 +21,7 @@ class NoteDetailScreen extends Component {
     this.props.navigation.setParams({
       handleOK: this.handleOK.bind(this),
     });
+    this.onNoteLoad();
   }
 
   componentWillUnmount() {
@@ -22,12 +32,30 @@ class NoteDetailScreen extends Component {
     this.props.navigatePop();
   }
 
+  onTextChange(text) {
+    this.props.noteTextChange({ text });
+  }
+
+  async onNoteLoad() {
+    if (this.props.navigation.state.params) {
+      const params = this.props.navigation.state.params;
+      if (params.title == 'Open') {
+        const text = await AsyncStorage.getItem('noteItem');
+        if (text) this.props.noteLoad({ text });
+      } else {
+        const text = '';
+        this.props.noteTextChange({ text });
+      }
+    }
+  }
+
   handleOK() {
     Alert.alert('Are you sure?', '', [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'OK',
-        onPress: () => {
+        onPress: async () => {
+          await AsyncStorage.setItem('noteItem', this.props.note);
           this.onNavigatePop();
         },
       },
@@ -58,9 +86,23 @@ class NoteDetailScreen extends Component {
   });
 
   render() {
+    const { containerStyle, noteAreaStyle } = styles;
     return (
-      <SafeAreaView style={styles.containerStyle}>
-        <Text>You just clicked {this.props.navigation.state.params.title}</Text>
+      <SafeAreaView style={containerStyle}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : null}
+          keyboardVerticalOffset={60} // iOS Keyboard Height Calibrate
+          style={{ flex: 1 }}
+        >
+          <TextInput
+            style={noteAreaStyle}
+            onChangeText={text => this.onTextChange(text)}
+            value={this.props.note}
+            multiline={true}
+            spellCheck={false}
+            autoCorrect={false}
+          />
+        </KeyboardAvoidingView>
       </SafeAreaView>
     );
   }
@@ -68,15 +110,31 @@ class NoteDetailScreen extends Component {
 
 NoteDetailScreen.propTypes = {
   navigation: PropTypes.object,
+  note: PropTypes.string,
   navigatePop: PropTypes.func,
+  noteTextChange: PropTypes.func,
+  noteLoad: PropTypes.func,
 };
 
 const styles = {
   containerStyle: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+  noteAreaStyle: {
+    height: '100%',
+    backgroundColor: 'white',
+    paddingTop: 10,
+    paddingBottom: 25,
+    paddingHorizontal: 15,
+    fontSize: 20,
   },
 };
 
-export default connect(null, { navigatePop })(NoteDetailScreen);
+const mapStateToProps = state => {
+  return { note: state.note };
+};
+
+export default connect(mapStateToProps, { navigatePop, noteTextChange, noteLoad })(
+  NoteDetailScreen,
+);

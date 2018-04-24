@@ -13,8 +13,8 @@ class NoteScreen extends Component {
     });
   }
 
-  onNavigateTo(path) {
-    this.props.navigateTo(path);
+  onNavigateTo(path, params) {
+    this.props.navigateTo(path, params);
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -69,13 +69,13 @@ class NoteScreen extends Component {
           }}
           title={'Open Note'}
           onPress={() => {
-            this.onNavigateTo('NoteModal', { title: 'Open Note' });
+            this.onNavigateTo('NoteModal', { title: 'Open' });
           }}
         />
         <Button
           title={'New Note'}
           onPress={() => {
-            this.onNavigateTo('NoteModal', { title: 'New Note' });
+            this.onNavigateTo('NoteModal', { title: 'New' });
           }}
         />
         <Button
